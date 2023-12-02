@@ -32,6 +32,8 @@ int main()
     #endif
 }
 ```
+![image](https://github.com/Lovely-XPP/OptimizeMethod/assets/66028151/48b9c23e-ce7c-4709-bcff-3fcb43da3bd4)
+
 
 ### Assignment 2
 分别使用拟牛顿方法中BFGS方法与DFP方法，采用Armijo准则进行非精确线搜索方法，使用迭代初始点$(2,2)^T$，计算$f(x_1, x_2) = x_1^2 - x_1 x_2 + x_2^2 + 2x_1 - 4x_2$的最小值。
@@ -71,3 +73,4 @@ int main()
 }
 
 ```
+![image](https://github.com/Lovely-XPP/OptimizeMethod/assets/66028151/27919044-1ca7-4c00-991a-3f41f3dbe9e1)
