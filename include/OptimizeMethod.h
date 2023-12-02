@@ -54,16 +54,16 @@ class OptimizeMethod
 
         /// @brief 初始化优化方法类，目前算法支持：单峰区间搜索、黄金分割区间搜索、精确线搜索（单峰区间+黄金分割）、Armijo 非精确线搜索、最速下降法、拟牛顿BFGS算法、拟牛顿DFP算法
         /// @param target 目标函数指针，无目标函数的梯度解析函数，计算过程将采用数值梯度
-        /// @param log_lv 输出日志，支持 spdlog::debug / spdlog::level::info
+        /// @param log_lv 输出日志，支持 spdlog::debug / spdlog::level::info，默认为 spdlog::level::info
         /// @param show_sub_info 是否输出迭代过程中的子迭代过程（线搜索迭代过程）
-        OptimizeMethod(double (*target)(Eigen::VectorXd input), spdlog::level::level_enum log_lv, bool show_sub_info = false);
+        OptimizeMethod(double (*target)(Eigen::VectorXd input), spdlog::level::level_enum log_lv = spdlog::level::info, bool show_sub_info = false);
 
         /// @brief 初始化优化方法类，目前算法支持：单峰区间搜索、黄金分割区间搜索、精确线搜索（单峰区间+黄金分割）、Armijo 非精确线搜索、最速下降法、拟牛顿BFGS算法、拟牛顿DFP算法
         /// @param target 目标函数指针
         /// @param grad_target 目标梯度函数指针
-        /// @param log_lv 输出日志，支持 spdlog::debug / spdlog::level::info
+        /// @param log_lv 输出日志，支持 spdlog::debug / spdlog::level::info，默认为 spdlog::level::info
         /// @param show_sub_info 是否输出迭代过程中的子迭代过程（线搜索迭代过程）
-        OptimizeMethod(double (*target)(Eigen::VectorXd input), Eigen::VectorXd (*grad_target)(Eigen::VectorXd input), spdlog::level::level_enum log_lv, bool show_sub_info = false);
+        OptimizeMethod(double (*target)(Eigen::VectorXd input), Eigen::VectorXd (*grad_target)(Eigen::VectorXd input), spdlog::level::level_enum log_lv = spdlog::level::info, bool show_sub_info = false);
 
         /// @brief 单峰区间搜索算法
         /// @param max_iteration 最大迭代步数
