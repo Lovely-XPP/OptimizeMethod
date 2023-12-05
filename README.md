@@ -1,7 +1,7 @@
 # OptimizeMethod
 
 ## 简介
-传统常见最优化方法C++封装，包括单峰区间搜索、黄金分割区间搜索、精确线搜索（单峰区间+黄金分割）、Armijo 非精确线搜索、最速下降法、拟牛顿BFGS算法、拟牛顿DFP算法等
+传统常见最优化方法封装，支持跨平台：Windows, Linux , macOS，包括单峰区间搜索、黄金分割区间搜索、精确线搜索（单峰区间+黄金分割）、Armijo 非精确线搜索、最速下降法、拟牛顿BFGS算法、拟牛顿DFP算法等。
 
 ## 依赖库（已包含在3rdparty内）
 
@@ -32,7 +32,8 @@ int main()
     #endif
 }
 ```
-![image](https://github.com/Lovely-XPP/OptimizeMethod/assets/66028151/48b9c23e-ce7c-4709-bcff-3fcb43da3bd4)
+
+![image](https://github.com/Lovely-XPP/OptimizeMethod/assets/66028151/f1a32c6d-250a-4d83-9b16-f6b577eca6ff)
 
 
 ### Assignment 2
