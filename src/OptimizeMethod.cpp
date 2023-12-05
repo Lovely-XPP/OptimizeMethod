@@ -404,38 +404,38 @@ Eigen::VectorXd OptimizeMethod::gradient_descent(int const max_iteration, double
     return x;
 }
 
-Eigen::VectorXd OptimizeMethod::Newtow_BFGS(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0)
+Eigen::VectorXd OptimizeMethod::Newton_BFGS(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0)
 {
     // 设置为非线索模式
     line_search_mode = false;
     // 判断误差限条件
     if (eps <= 0)
     {
-        spdlog::error("[Newtow_BFGS] Error Limitation (eps) must be > 0.");
+        spdlog::error("[Newton_BFGS] Error Limitation (eps) must be > 0.");
         exit(0);
     }
     // 判断步长条件
     if (step <= 0)
     {
-        spdlog::error("[Newtow_BFGS] Step must be > 0.");
+        spdlog::error("[Newton_BFGS] Step must be > 0.");
         exit(0);
     }
     // 判断最大迭代条件
     if (max_iteration <= 0)
     {
-        spdlog::error("[Newtow_BFGS] max_iteration must be > 0.");
+        spdlog::error("[Newton_BFGS] max_iteration must be > 0.");
         exit(0);
     }
     // 判断beta条件
     if (beta <= 0 || beta >= 1)
     {
-        spdlog::error("[Newtow_BFGS] beta must feet 0 < beta < 1.");
+        spdlog::error("[Newton_BFGS] beta must feet 0 < beta < 1.");
         exit(0);
     }
     // 判断sigma条件
     if (sigma <= 0 || sigma >= 1)
     {
-        spdlog::error("[Newtow_BFGS] beta must feet 0 < sigma < 0.05.");
+        spdlog::error("[Newton_BFGS] beta must feet 0 < sigma < 0.05.");
         exit(0);
     }
 
@@ -452,8 +452,8 @@ Eigen::VectorXd OptimizeMethod::Newtow_BFGS(int const max_iteration, double cons
     int k = 0;
     double alpha = 0;
     double err = 0;
-    spdlog::debug("[Newtow_BFGS] [Setting]  Max Iter: {0:d}  Step: {1:.6f}  beta: {2:.6f}  sigma: {3:.6f}  Error Limit: {4:.6f}", max_iteration, step, beta, sigma, eps);
-    spdlog::info("[Newtow_BFGS]  ******************** Start ********************");
+    spdlog::debug("[Newton_BFGS] [Setting]  Max Iter: {0:d}  Step: {1:.6f}  beta: {2:.6f}  sigma: {3:.6f}  Error Limit: {4:.6f}", max_iteration, step, beta, sigma, eps);
+    spdlog::info("[Newton_BFGS]  ******************** Start ********************");
 
     // 开始循环算法
     for (; k <= max_iteration; k++)
@@ -461,7 +461,7 @@ Eigen::VectorXd OptimizeMethod::Newtow_BFGS(int const max_iteration, double cons
         // 求梯度
         gk = calculate_grad(xk, step);
         err = gk.norm();
-        spdlog::debug("[Newtow_BFGS] [iter {0}]  Error: {1:.8f}", k, err);
+        spdlog::debug("[Newton_BFGS] [iter {0}]  Error: {1:.8f}", k, err);
 
         // 判断是否满足迭代停止条件
         if (err <= eps)
@@ -487,45 +487,45 @@ Eigen::VectorXd OptimizeMethod::Newtow_BFGS(int const max_iteration, double cons
         // 更新参数
         xk = xk_;
     }
-    spdlog::info("[Newtow_BFGS]  Iter: {0:d}  Result: [{1:.8f} {2:.8f}]  Function Value: {3:.8f}", k, xk[0], xk[1], target_function(xk));
-    spdlog::info("[Newtow_BFGS]  ********************  End  ********************");
+    spdlog::info("[Newton_BFGS]  Iter: {0:d}  Result: [{1:.8f} {2:.8f}]  Function Value: {3:.8f}", k, xk[0], xk[1], target_function(xk));
+    spdlog::info("[Newton_BFGS]  ********************  End  ********************");
     // 重置为线索模式
     line_search_mode = true;
     return xk;
 }
 
-Eigen::VectorXd OptimizeMethod::Newtow_DFP(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0)
+Eigen::VectorXd OptimizeMethod::Newton_DFP(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0)
 {
     // 设置为非线索模式
     line_search_mode = false;
     // 判断误差限条件
     if (eps <= 0)
     {
-        spdlog::error("[Newtow_DFP] Error Limitation (eps) must be > 0.");
+        spdlog::error("[Newton_DFP] Error Limitation (eps) must be > 0.");
         exit(0);
     }
     // 判断步长条件
     if (step <= 0)
     {
-        spdlog::error("[Newtow_DFP] Step must be > 0.");
+        spdlog::error("[Newton_DFP] Step must be > 0.");
         exit(0);
     }
     // 判断最大迭代条件
     if (max_iteration <= 0)
     {
-        spdlog::error("[Newtow_DFP] max_iteration must be > 0.");
+        spdlog::error("[Newton_DFP] max_iteration must be > 0.");
         exit(0);
     }
     // 判断beta条件
     if (beta <= 0 || beta >= 1)
     {
-        spdlog::error("[Newtow_DFP] beta must feet 0 < beta < 1.");
+        spdlog::error("[Newton_DFP] beta must feet 0 < beta < 1.");
         exit(0);
     }
     // 判断sigma条件
     if (sigma <= 0 || sigma >= 1)
     {
-        spdlog::error("[Newtow_DFP] beta must feet 0 < sigma < 0.05.");
+        spdlog::error("[Newton_DFP] beta must feet 0 < sigma < 0.05.");
         exit(0);
     }
 
@@ -542,8 +542,8 @@ Eigen::VectorXd OptimizeMethod::Newtow_DFP(int const max_iteration, double const
     int k = 0;
     double alpha = 0;
     double err = 0;
-    spdlog::debug("[Newtow_DFP] [Setting]  Max Iter: {0:d}  Step: {1:.6f}  beta: {2:.6f}  sigma: {3:.6f}  Error Limit: {4:.6f}", max_iteration, step, beta, sigma, eps);
-    spdlog::info("[Newtow_DFP]  ******************** Start ********************");
+    spdlog::debug("[Newton_DFP] [Setting]  Max Iter: {0:d}  Step: {1:.6f}  beta: {2:.6f}  sigma: {3:.6f}  Error Limit: {4:.6f}", max_iteration, step, beta, sigma, eps);
+    spdlog::info("[Newton_DFP]  ******************** Start ********************");
 
     // 开始循环算法
     for (; k <= max_iteration; k++)
@@ -551,7 +551,7 @@ Eigen::VectorXd OptimizeMethod::Newtow_DFP(int const max_iteration, double const
         // 求梯度
         gk = calculate_grad(xk, step);
         err = gk.norm();
-        spdlog::debug("[Newtow_DFP] [iter {0}]  Error: {1:.8f}", k, err);
+        spdlog::debug("[Newton_DFP] [iter {0}]  Error: {1:.8f}", k, err);
 
         // 判断是否满足迭代停止条件
         if (err <= eps)
@@ -577,8 +577,8 @@ Eigen::VectorXd OptimizeMethod::Newtow_DFP(int const max_iteration, double const
         // 更新参数
         xk = xk_;
     }
-    spdlog::info("[Newtow_DFP]  Iter: {0:d}  Result: [{1:.8f} {2:.8f}]  Function Value: {3:.8f}", k, xk[0], xk[1], target_function(xk));
-    spdlog::info("[Newtow_DFP]  ********************  End  ********************");
+    spdlog::info("[Newton_DFP]  Iter: {0:d}  Result: [{1:.8f} {2:.8f}]  Function Value: {3:.8f}", k, xk[0], xk[1], target_function(xk));
+    spdlog::info("[Newton_DFP]  ********************  End  ********************");
     // 重置为线索模式
     line_search_mode = true;
     return xk;

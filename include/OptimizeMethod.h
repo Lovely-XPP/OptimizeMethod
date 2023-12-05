@@ -119,7 +119,7 @@ class OptimizeMethod
         /// @param step 搜索步长，需要大于0
         /// @param x_0 初始迭代点
         /// @return 极小值点
-        Eigen::VectorXd Newtow_BFGS(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0);
+        Eigen::VectorXd Newton_BFGS(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0);
 
         /// @brief 拟牛顿 DFP 算法
         /// @param max_iteration 最大迭代步数
@@ -129,7 +129,7 @@ class OptimizeMethod
         /// @param step 搜索步长，需要大于0
         /// @param x_0 初始迭代点
         /// @return 极小值点
-        Eigen::VectorXd Newtow_DFP(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0);
+        Eigen::VectorXd Newton_DFP(int const max_iteration, double const beta, double const sigma, double const eps, double const step, Eigen::VectorXd x_0);
 };
 
 #endif
